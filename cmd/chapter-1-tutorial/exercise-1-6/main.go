@@ -3,7 +3,7 @@
 	more values to palette and then displaying them by changing the third argument
 	of SetColorIndex in some interesting way.
 */
-package main
+package exercise_1_6
 
 import (
 	"image"
@@ -12,8 +12,6 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
-	"time"
 )
 
 var palette = []color.Color{
@@ -23,14 +21,9 @@ var palette = []color.Color{
 	color.RGBA{B: 0xFF, A: 0xff},
 }
 
-func main() {
-	rand.Seed(time.Now().UTC().UnixNano())
-	lissajous(os.Stdout)
-}
-
-func lissajous(out io.Writer) {
+func Lissajous(out io.Writer, cycles int) {
 	const (
-		cycles = 5     // number of complete x oscillator revolutions
+		//cycles = 5     // number of complete x oscillator revolutions
 		res    = 0.001 // angular resolution
 		size   = 100   // image canvas covers [-size..+size]
 		frames = 64    // number of animation frames
@@ -48,7 +41,7 @@ func lissajous(out io.Writer) {
 
 		img := image.NewPaletted(rect, palette)
 
-		for t := 0.0; t < cycles*2*math.Pi; t += res {
+		for t := 0.0; t < float64(cycles)*2*math.Pi; t += res {
 
 			// colorIndex := uint8(int(t) % 4)
 
